@@ -28,7 +28,7 @@ app.post("/book", (req, res) => {
     traceIdString = getCurrentTraceIdString();
 
     const booking = req.body;
-    console.log("Received booking:", JSON.stringify(booking));
+    console.log(traceIdString+"Received booking:", JSON.stringify(booking));
 
     //check availability
     axios.post(ROOM_AVAILABILITY_URL+'/check-availability', booking)
@@ -53,7 +53,7 @@ app.post("/book", (req, res) => {
             res.status(201).json({ message: "Booking created successfully", booking });
         })
         .catch(error => {
-            console.error("Error checking availability:", error);
+            console.error(traceIdString+"Error checking availability");
             res.status(500).json({ message: "Error checking availability" });
         });
 });

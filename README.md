@@ -52,23 +52,23 @@ In the web tty
 ```sh
 kubectl create ns apps
 
-kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/intro-observability-workshop/refs/heads/master/microservices/room-availability/deploy-success.yaml
+kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/k8s-appo11y-workshop/refs/heads/master/microservices/room-availability/deploy-success.yaml
 
-kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/intro-observability-workshop/refs/heads/master/microservices/email-channel/deploy.yaml
+kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/k8s-appo11y-workshop/refs/heads/master/microservices/email-channel/deploy.yaml
 
-kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/intro-observability-workshop/refs/heads/master/microservices/sms-channel/deploy.yaml
+kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/k8s-appo11y-workshop/refs/heads/master/microservices/sms-channel/deploy.yaml
 
-kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/intro-observability-workshop/refs/heads/master/microservices/booking-notification/deploy.yaml
+kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/k8s-appo11y-workshop/refs/heads/master/microservices/booking-notification/deploy.yaml
 
-kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/intro-observability-workshop/refs/heads/master/microservices/booking-hub/deploy.yaml
+kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/k8s-appo11y-workshop/refs/heads/master/microservices/booking-hub/deploy.yaml
 
-kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/intro-observability-workshop/refs/heads/master/k6/k6.yaml
+kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/k8s-appo11y-workshop/refs/heads/master/k6/k6.yaml
 
 ```
 
 deploy faulty component 
 ```sh 
-kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/intro-observability-workshop/refs/heads/master/microservices/room-availability/deploy-faulty.yaml
+kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/k8s-appo11y-workshop/refs/heads/master/microservices/room-availability/deploy-faulty.yaml
 
 ```
 
