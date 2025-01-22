@@ -39,6 +39,8 @@ kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/intro-observa
 
 kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/intro-observability-workshop/refs/heads/master/microservices/booking-hub/deploy.yaml
 
+kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/intro-observability-workshop/refs/heads/master/k6/k6.yaml
+
 ```
 
 ## LAB 03 : Finding root cause with Grafana Cloud

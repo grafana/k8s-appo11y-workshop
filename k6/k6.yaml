@@ -112,7 +112,7 @@ spec:
             imagePullPolicy: IfNotPresent
             env:
               - name: BASE_URL
-                value: ${BASE_URL}
+                value: http://booking-hub:8080
             volumeMounts:
             - name: k6-config
               mountPath: /scripts/
