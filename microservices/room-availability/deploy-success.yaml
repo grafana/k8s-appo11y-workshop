@@ -1,0 +1,121 @@
+---
+# Deployment descriptor
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: "room-availability"
+    app.kubernetes.io/component: "room-availability"
+    app.kubernetes.io/part-of: "room-availability"
+    app.kubernetes.io/instance: "room-availability-main"
+    app.kubernetes.io/version: "latest"
+  name: "room-availability"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: "room-availability"
+      app.kubernetes.io/component: "room-availability"
+      app.kubernetes.io/part-of: "room-availability"
+      app.kubernetes.io/instance: "room-availability-main"
+      app.kubernetes.io/version: "latest"
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path:  "/metrics"
+      labels:
+        app.kubernetes.io/name: "room-availability"
+        app.kubernetes.io/component: "room-availability"
+        app.kubernetes.io/part-of: "room-availability"
+        app.kubernetes.io/instance: "room-availability-main"
+        app.kubernetes.io/version: "latest"
+    spec:
+      containers:
+      - name: room-availability
+        image: "alainpham/room-availability:latest"
+        imagePullPolicy: "Always"
+        env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: OTEL_METRICS_EXPORTER
+            value: "otlp"
+          - name: OTEL_LOGS_EXPORTER
+            value: "otlp"
+          - name: OTEL_TRACES_EXPORTER
+            value: "otlp"
+          - name: OTEL_EXPORTER_OTLP_PROTOCOL
+            value: "http/protobuf"
+          - name: OTEL_EXPORTER_OTLP_ENDPOINT
+            value: "http://grafana-k8s-monitoring-alloy.agents.svc.cluster.local:4318"
+          - name: OTEL_SERVICE_NAME
+            value: "room-availability"
+          - name: NODE_OPTIONS
+            value: "--require @opentelemetry/auto-instrumentations-node/register"
+          - name: OTEL_RESOURCE_ATTRIBUTES
+            value: "service.name=room-availability,service.namespace=$(POD_NAMESPACE),service.instance.id=$(POD_NAME),service.version=latest,k8s.namespace.name=$(POD_NAMESPACE),k8s.pod.name=$(POD_NAME)"
+          - name: ROOM_AVAILABLE_RATE
+            value: "80"
+          - name: DBCONNECTION_FAILURE_RATE
+            value: "-1"
+          - name: STORAGELIMIT_FAILURE_RATE
+            value: "-1"
+        livenessProbe:
+          httpGet:
+            path: "/metrics"
+            port: 8080
+            scheme: "HTTP"
+          initialDelaySeconds: 0
+          successThreshold: 1
+          periodSeconds: 3
+          failureThreshold: 60 
+        readinessProbe:
+          httpGet:
+            path: "/metrics"
+            port: 8080
+            scheme: "HTTP"
+          initialDelaySeconds: 0
+          successThreshold: 1
+          periodSeconds: 3
+          failureThreshold: 60 
+        resources:
+          # limits:
+          #   cpu: "1.0"
+          #   memory: "1024Mi"
+          # requests:
+          #   cpu: "0.2"
+          #   memory: "128Mi"
+        ports:
+          - containerPort: 8080
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  labels:
+    app.kubernetes.io/name: "room-availability"
+    app.kubernetes.io/component: "room-availability"
+    app.kubernetes.io/part-of: "room-availability"
+    app.kubernetes.io/instance: "room-availability-main"
+    app.kubernetes.io/version: "latest"
+  name: "room-availability"
+spec:
+  type: ClusterIP
+  ports:
+  - name: "http"
+    port: 8080
+    protocol: "TCP"
+    targetPort: 8080
+  selector:
+    app.kubernetes.io/name: "room-availability"
+    app.kubernetes.io/component: "room-availability"
+    app.kubernetes.io/part-of: "room-availability"
+    app.kubernetes.io/instance: "room-availability-main"
+    app.kubernetes.io/version: "latest"
+---
