@@ -43,4 +43,10 @@ kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/intro-observa
 
 ```
 
+deploy faulty component 
+```sh 
+kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/intro-observability-workshop/refs/heads/master/microservices/room-availability/deploy-faulty.yaml
+
+```
+
 ## LAB 03 : Finding root cause with Grafana Cloud

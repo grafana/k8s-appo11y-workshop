@@ -16,8 +16,8 @@ stringData:
     // Define the options for your test
     export let options = {
         stages: [
-            { duration: '30s', target: 5 }, 
-            { duration: '2m', target: 15 }, 
+            { duration: '30s', target: 1 }, 
+            { duration: '2m', target: 7 }, 
             { duration: '30s', target: 3 }   
         ],
     };
