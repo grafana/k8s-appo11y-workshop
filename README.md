@@ -20,7 +20,26 @@ Make sure you have your credentials to access webtty & grafana cloud stack
 
 1. Open a terminal to the environement in a browser to ```https://WORKSHOPID.work-shop.grafana.net``` with the received credentials
 2. Open Grafana in a browser ```https://USERID.work-shop.grafana.net``` with the received credentials
-3. Navigate to Infrastructure monitoring -> Kubernetes.
+3. Navigate to Infrastructure -> Kubernetes.
+
+![alt text](/graphics/01.png)
+
+4. Click on Start Sending Data
+5. Click on Install
+6. Fill in cluster information
+Cluster name : WORKSHOPID-USERID
+Namespace : agents
+Tick option : Grafana Application Observability
+
+![alt text](/graphics/02.png)
+
+7. Name the token ```k8stelemetry``` Cick on create new token
+
+![alt text](/graphics/03.png)
+
+8. Copy Helm command and run in webtty
+
+![alt text](/graphics/04.png)
 
 ## LAB 02 : Deploy Microservices & send
 
