@@ -1,0 +1,123 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  labels:
+    app: k6
+  name: k6-config
+type: Opaque
+stringData: 
+  script.js: |
+    import http from 'k6/http';
+    import { check, sleep } from 'k6';
+
+    // Define the base URL of your API
+    const BASE_URL = __ENV.BASE_URL || 'http://booking-hub:8080';
+
+    // Define the options for your test
+    export let options = {
+        stages: [
+            { duration: '30s', target: 5 }, 
+            { duration: '2m', target: 15 }, 
+            { duration: '30s', target: 3 }   
+        ],
+    };
+
+    // Define the main function that represents your test scenario
+    export default function () {
+        let body;
+        let headers;
+        let response;
+
+        body = {
+            "id": 0,
+            "customerName": "alain",
+            "bookingStartDate": "2023-12-10",
+            "bookingEndDate": "2023-12-15",
+            "hotel": "accor",
+            "room": "3"
+          };
+
+        headers = {
+            'Content-Type': 'application/json',
+        };
+        response = http.post(`${BASE_URL}/book`, JSON.stringify(body), { headers: headers });
+
+        check(response, {
+            'Status 20x': (r) => r.status === 200 || r.status === 201,
+        });
+
+        sleep(1);
+
+
+        body = {
+            "id": 0,
+            "customerName": "alain",
+            "bookingStartDate": "2023-12-10",
+            "bookingEndDate": "2023-12-15",
+            "hotel": "accor",
+            "room": "5"
+          };
+
+        headers = {
+            'Content-Type': 'application/json',
+        };
+        response = http.post(`${BASE_URL}/book`, JSON.stringify(body), { headers: headers });
+
+        check(response, {
+            'Status 20x': (r) => r.status === 200 || r.status === 201,
+        });
+
+        sleep(1);
+
+
+        body = {
+            "id": 0,
+            "customerName": "alain",
+            "bookingStartDate": "2023-12-01",
+            "bookingEndDate": "2023-12-01",
+            "hotel": "accor",
+            "room": "5"
+          };
+
+        headers = {
+            'Content-Type': 'application/json',
+        };
+        response = http.post(`${BASE_URL}/book`, JSON.stringify(body), { headers: headers });
+
+        check(response, {
+            'Status 20x': (r) => r.status === 200 || r.status === 201,
+        });
+
+        sleep(1);
+
+
+    }
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  labels:
+    app: k6
+  name: k6-job
+spec:
+  schedule: "*/7 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: k6
+            image: "grafana/k6:0.56.0"
+            args: ["run", "/scripts/script.js"]
+            imagePullPolicy: IfNotPresent
+            env:
+              - name: BASE_URL
+                value: ${BASE_URL}
+            volumeMounts:
+            - name: k6-config
+              mountPath: /scripts/
+          restartPolicy: OnFailure
+          volumes:
+            - name: k6-config
+              secret:
+                secretName: k6-config
