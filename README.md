@@ -24,6 +24,10 @@ Make sure you have your credentials to access webtty & grafana cloud stack
 
 ## LAB 02 : Deploy Microservices & send
 
+Architecture of microservices apps
+
+![arch](graphics/architecture.png))
+
 In the web tty
 
 ```sh
