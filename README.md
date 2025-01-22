@@ -24,5 +24,22 @@ Make sure you have your credentials to access webtty & grafana cloud stack
 
 ## LAB 02 : Deploy Microservices & send
 
+In the web tty
+
+```sh
+kubectl create ns apps
+
+kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/intro-observability-workshop/refs/heads/master/microservices/room-availability/deploy-success.yaml
+
+kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/intro-observability-workshop/refs/heads/master/microservices/email-channel/deploy.yaml
+
+kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/intro-observability-workshop/refs/heads/master/microservices/sms-channel/deploy.yaml
+
+kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/intro-observability-workshop/refs/heads/master/microservices/booking-notification/deploy.yaml
+
+kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/intro-observability-workshop/refs/heads/master/microservices/booking-hub/deploy.yaml
+
+
+```
 
 ## LAB 03 : Finding root cause with Grafana Cloud

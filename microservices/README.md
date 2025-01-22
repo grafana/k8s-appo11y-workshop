@@ -21,8 +21,8 @@ docker run --rm -d --net mainnet -p 7083:8080 --name sms-channel alainpham/sms-c
 docker run --rm -d --net mainnet -p 8080:8080 --name booking-hub alainpham/booking-hub
 
 docker stop room-availability
-docker stop booking-notification
 docker stop email-channel
 docker stop sms-channel
+docker stop booking-notification
 docker stop booking-hub
 ```

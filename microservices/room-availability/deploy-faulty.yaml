@@ -69,7 +69,7 @@ spec:
             value: "5"
         livenessProbe:
           httpGet:
-            path: "/metrics"
+            path: "/"
             port: 8080
             scheme: "HTTP"
           initialDelaySeconds: 0
@@ -78,7 +78,7 @@ spec:
           failureThreshold: 60 
         readinessProbe:
           httpGet:
-            path: "/metrics"
+            path: "/"
             port: 8080
             scheme: "HTTP"
           initialDelaySeconds: 0
