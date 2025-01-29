@@ -35,7 +35,10 @@ Make sure you have your credentials to access webtty & grafana cloud stack
 7. Fill in cluster information
 
 to get cluster name in webtty
+
+```
 kubectl config view --minify -o jsonpath='{.clusters[0].name}' && echo
+```
 
 Cluster name : WORKSHOPID-USERID
 Namespace : agents
