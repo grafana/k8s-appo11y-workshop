@@ -6,6 +6,8 @@
   - [LAB 02 : Deploy Microservices \& send data](#lab-02--deploy-microservices--send-data)
   - [LAB 03 : Troubleshooting issues with Grafana Cloud O11y solutions](#lab-03--troubleshooting-issues-with-grafana-cloud-o11y-solutions)
     - [LAB 3.1 : Explore the healthy instance](#lab-31--explore-the-healthy-instance)
+    - [LAB 3.2 : Let’s find some issues](#lab-32--lets-find-some-issues)
+    - [LAB 3.3](#lab-33)
 - [Appendix](#appendix)
 
 
@@ -163,6 +165,40 @@ Now come back to services, click on one service, and check that all the data is 
 Finally, go to the SLO Performance page, and see the different KPI. Once again, everything should be green.
 
 ![alt text](graphics/13.png)
+
+All good. Now that you know what a healthy instance looks like, let's add some errors and start troubleshooting with Grafana Cloud.
+
+### LAB 3.2 : Let’s find some issues
+
+Connect to the second instance and let’s start understanding what’s going on. 
+
+DISCLAIMER: the errors that you will see here are artificially introduced. This means that some aspects may seem weird. Also, you won’t be able to find the final root cause with all the details. The objective is to move from a website that’s not working properly, down to the services, API or component that has an issue.
+
+- Access the website and click around. Add products to cart, checkout, see recommendations, etc. Have you noticed something?
+- Now, open Grafana and go to Frontend. You should see a high number of errors and degraded KPIs. Analyze which pages are impacted. Go to the error tabs and analyze the errors. Have you noticed that the calls to the checkout API seem to be failing? But is this service the real problem? Often failures have a cascading effect. We need to go deeper to find the problematic service.
+- Go to App Observability and review the list of services. Where are the services throwing errors? Is this aligned with what you saw in Frontend?
+- Go back now to the services view, and open the Checkout service. See the Inbound and Outbound connections. Anything else jumps to your eyes? It looks like there’s another service involved in these issues. Which one? You can confirm this by going into the service map view.
+- Let leverage traces to see what’s going on with more details. Click on the traces button in the errors panel. These should show you all the traces that have span errors. Click on one of these and analyze the flame graph. See the events in the problematic span. Compare the duration of the different span. Is there a Span that’s anomaly slow?
+- Continue playing around with the trace. Click on logs and see if you understand what’s going on. Have you found the issue? Great.
+- Let’s see now what’s the impact of the problem. Go to SLO Performance and how are the SLI and error budget for the service you just found. Waw! We are way out of budget. We are losing way too much revenue. At least we know now where the problem is coming from and we will contact the team responsible for it.
+- Good job. But before moving to the next exercise, have you noticed another issue? It looks like there’s another problem that we didn’t notice. Which service is it?
+- Go back to app O11y and explore this service. In the duration distribution, click on the biggest histogram. This should take you to the traces that are taking a long time. Sort traces by duration. Explore the spans and see where the bottleneck is. Do you think there’s another problem or is this related to the previous one?
+
+### LAB 3.3
+
+Connect to the third instance and let’s see how Asserts can make this process even faster.
+
+This instance has a different problem. It happened in the last 24 hours and has already been fixed. Customers were not able to buy products on our website. We will see how Asserts can be used to diagnose this problem.
+
+- Go to Asserts, and change the timeframe to Last 24 hours. You should see that some services were red because Assertions had been generated.
+- Click on product catalog and click on Troubleshoot in workbench.
+- Click on add problematic connections. This should add two entities to the workbench.
+- Select the time when several problems happened
+- Go to Summary tab and sort by time
+- Explore the different anomalies that Asserts detected and navigate the assets suggested
+- Were you able to find this error in the logs : “panic: runtime error: invalid memory address or nil pointer dereference. time="2025-01-27T15:47:10Z" level=error msg="pq: sorry, too many clients already" ?
+- The feature flag that we enabled deployed a new version of the service, that didn’t use the Postgres SQL server correctly, kept connections open, caused pods to die, and some memory leak problems
+
 
 # Appendix
 
