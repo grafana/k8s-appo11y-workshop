@@ -4,11 +4,11 @@
   - [Prerequisites](#prerequisites)
   - [LAB 01 : Deploy the Agent Grafana Alloy \& Use Kubernetes Observability](#lab-01--deploy-the-agent-grafana-alloy--use-kubernetes-observability)
   - [LAB 02 : Deploy Microservices \& send data](#lab-02--deploy-microservices--send-data)
+    - [Optional action](#optional-action)
   - [LAB 03 : Troubleshooting issues with Grafana Cloud O11y solutions](#lab-03--troubleshooting-issues-with-grafana-cloud-o11y-solutions)
     - [LAB 3.1 : Explore the healthy instance](#lab-31--explore-the-healthy-instance)
     - [LAB 3.2 : Let’s find some issues](#lab-32--lets-find-some-issues)
     - [LAB 3.3](#lab-33)
-- [Appendix](#appendix)
 
 
 ## Prerequisites
@@ -120,6 +120,13 @@ kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/k8s-appo11y-w
 
 ![alt text](graphics/07.png)
 
+### Optional action
+
+deploy non buggy component 
+```sh 
+kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/k8s-appo11y-workshop/refs/heads/master/microservices/room-availability/deploy-success.yaml
+
+```
 
 ## LAB 03 : Troubleshooting issues with Grafana Cloud O11y solutions
 
@@ -200,11 +207,5 @@ This instance has a different problem. It happened in the last 24 hours and has 
 - The feature flag that we enabled deployed a new version of the service, that didn’t use the Postgres SQL server correctly, kept connections open, caused pods to die, and some memory leak problems
 
 
-# Appendix
 
-deploy non buggy component 
-```sh 
-kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/k8s-appo11y-workshop/refs/heads/master/microservices/room-availability/deploy-success.yaml
-
-```
 
