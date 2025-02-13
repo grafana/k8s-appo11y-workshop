@@ -8,7 +8,7 @@
   - [LAB 03 : Troubleshooting issues with Grafana Cloud O11y solutions](#lab-03--troubleshooting-issues-with-grafana-cloud-o11y-solutions)
     - [LAB 3.1 : Explore the healthy instance](#lab-31--explore-the-healthy-instance)
     - [LAB 3.2 : Let’s find some issues](#lab-32--lets-find-some-issues)
-    - [LAB 3.3](#lab-33)
+    - [LAB 3.3 : Faster RCA with Assert](#lab-33--faster-rca-with-assert)
 
 
 ## Prerequisites
@@ -191,7 +191,7 @@ DISCLAIMER: the errors that you will see here are artificially introduced. This 
 - Good job. But before moving to the next exercise, have you noticed another issue? It looks like there’s another problem that we didn’t notice. Which service is it?
 - Go back to app O11y and explore this service. In the duration distribution, click on the biggest histogram. This should take you to the traces that are taking a long time. Sort traces by duration. Explore the spans and see where the bottleneck is. Do you think there’s another problem or is this related to the previous one?
 
-### LAB 3.3
+### LAB 3.3 : Faster RCA with Assert
 
 Connect to the third instance and let’s see how Asserts can make this process even faster.
 
