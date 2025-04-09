@@ -27,7 +27,7 @@ export default async function () {
 
         // Click on the OIDC login button
         const loginbutton = page.locator('a[href="login/generic_oauth"]');
-        await loginbutton.click();
+        await loginbutton.click(); 
 
         // Wait for the OIDC provider login page to load
         await page.waitForSelector('input[name="username"]');
@@ -35,7 +35,7 @@ export default async function () {
 
         // Fill in the OIDC login form
         await page.fill('input[name="username"]', 'backowner');
-        await page.fill('input[name="password"]', 'password');
+        await page.fill('input[name="password"]', 'passwords');
         await page.click('button[type="submit"]');
         await page.waitForTimeout(3000);
         await check(page.locator('h1'), {

@@ -9,6 +9,7 @@
     - [LAB 3.1 : Explore the healthy instance](#lab-31--explore-the-healthy-instance)
     - [LAB 3.2 : Let’s find some issues](#lab-32--lets-find-some-issues)
     - [LAB 3.3 : Faster RCA with Assert](#lab-33--faster-rca-with-assert)
+  - [LAB 04 : Browser Synthetic Test](#lab-04--browser-synthetic-test)
 
 
 ## Prerequisites
@@ -205,3 +206,10 @@ This instance has a different problem. It happened in the last 24 hours and has 
 - Explore the different anomalies that Asserts detected and navigate the assets suggested
 - Were you able to find this error in the logs : “panic: runtime error: invalid memory address or nil pointer dereference. time="2025-01-27T15:47:10Z" level=error msg="pq: sorry, too many clients already" ?
 - The feature flag that we enabled deployed a new version of the service, that didn’t use the Postgres SQL server correctly, kept connections open, caused pods to die, and some memory leak problems
+
+## LAB 04 : Browser Synthetic Test
+
+```sh 
+k6 run k6/browser-test/browser.js
+
+```
