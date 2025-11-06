@@ -1,0 +1,1 @@
+docker build . -t echo  && docker run --rm  echo
