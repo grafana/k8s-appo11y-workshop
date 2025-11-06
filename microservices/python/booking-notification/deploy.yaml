@@ -23,7 +23,7 @@ spec:
     metadata:
       annotations:
         prometheus.io/scrape: "false"
-        prometheus.io/port: "8080"
+        prometheus.io/port: "5000"
         prometheus.io/path:  "/metrics"
       labels:
         app.kubernetes.io/name: "booking-notification"
@@ -57,14 +57,12 @@ spec:
             value: "http://grafana-k8s-monitoring-alloy-receiver.default.svc.cluster.local:4318"
           - name: OTEL_SERVICE_NAME
             value: "booking-notification"
-          - name: NODE_OPTIONS
-            value: "--require @opentelemetry/auto-instrumentations-node/register"
           - name: OTEL_RESOURCE_ATTRIBUTES
             value: "service.name=booking-notification,service.namespace=$(POD_NAMESPACE),service.instance.id=$(POD_NAME),service.version=latest,k8s.namespace.name=$(POD_NAMESPACE),k8s.pod.name=$(POD_NAME)"
         livenessProbe:
           httpGet:
             path: "/"
-            port: 8080
+            port: 5000
             scheme: "HTTP"
           initialDelaySeconds: 0
           successThreshold: 1
@@ -73,7 +71,7 @@ spec:
         readinessProbe:
           httpGet:
             path: "/"
-            port: 8080
+            port: 5000
             scheme: "HTTP"
           initialDelaySeconds: 0
           successThreshold: 1

@@ -21,7 +21,9 @@ STORAGELIMIT_FAILURE_RATE = float(os.getenv('STORAGELIMIT_FAILURE_RATE', '2'))
 OK_RESPONSE_TIME_MS = float(os.getenv('OK_RESPONSE_TIME_MS', '20'))
 ERROR_RESPONSE_TIME_MS = float(os.getenv('ERROR_RESPONSE_TIME_MS', '100'))
 
-
+@app.route("/")
+def index():
+    return "Booking Notification Service is running.", 200
 
 @app.route("/notify", methods=["POST"])
 def notify():
