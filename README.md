@@ -103,9 +103,9 @@ kubectl create ns apps
 
 kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/k8s-appo11y-workshop/refs/heads/master/microservices/nodejs/room-availability/deploy-success.yaml
 
-kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/k8s-appo11y-workshop/refs/heads/master/microservices//nodejs/email-channel/deploy.yaml
+kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/k8s-appo11y-workshop/refs/heads/master/microservices/nodejs/email-channel/deploy.yaml
 
-kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/k8s-appo11y-workshop/refs/heads/master/microservices//nodejs/sms-channel/deploy.yaml
+kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/k8s-appo11y-workshop/refs/heads/master/microservices/nodejs/sms-channel/deploy.yaml
 
 kubectl -n apps apply -f https://raw.githubusercontent.com/grafana/k8s-appo11y-workshop/refs/heads/master/microservices/python/booking-notification/deploy.yaml
 
