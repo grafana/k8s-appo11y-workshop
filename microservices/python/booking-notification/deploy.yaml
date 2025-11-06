@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       - name: booking-notification
-        image: "alainpham/booking-notification"
+        image: "alainpham/booking-notification:1.0.0"
         imagePullPolicy: Always
         env:
           - name: POD_NAME

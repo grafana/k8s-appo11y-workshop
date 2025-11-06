@@ -3,7 +3,8 @@ FROM python:3.14
 WORKDIR /python-docker
 
 # install open telemetry
-RUN pip install opentelemetry-distro opentelemetry-exporter-otlp
+RUN pip install opentelemetry-distro opentelemetry-exporter-otlp opentelemetry-instrumentation-flask
+
 RUN opentelemetry-bootstrap -a install
 
 
