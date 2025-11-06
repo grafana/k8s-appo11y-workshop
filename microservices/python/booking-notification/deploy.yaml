@@ -103,7 +103,7 @@ spec:
   - name: "http"
     port: 8080
     protocol: "TCP"
-    targetPort: 8080
+    targetPort: 5000
   selector:
     app.kubernetes.io/name: "booking-notification"
     app.kubernetes.io/component: "booking-notification"
