@@ -1,0 +1,14 @@
+## Building the Docker Image
+
+To build the Docker image for the booking-notification, run the following command:
+
+```sh
+docker rmi alainpham/booking-notification
+docker build -t alainpham/booking-notification .
+```
+
+## Pushing to repository
+
+```sh
+docker push alainpham/booking-notification
+```

@@ -1,0 +1,1 @@
+docker build . -t booking-notifiation  && docker run --rm -e SMS_CHANNEL_URL=http://172.17.0.4:5000 -e EMAIL_CHANNEL_URL=http://172.17.0.4:5000 booking-notifiation
