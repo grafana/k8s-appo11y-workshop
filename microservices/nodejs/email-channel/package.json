@@ -12,7 +12,7 @@
   "description": "",
   "dependencies": {
     "@opentelemetry/api": "1.9.0",
-    "@opentelemetry/auto-instrumentations-node": "0.53.0",
+    "@opentelemetry/auto-instrumentations-node": "0.67.2",
     "body-parser": "1.20.3",
     "cors": "2.8.5",
     "express": "4.22.0",
