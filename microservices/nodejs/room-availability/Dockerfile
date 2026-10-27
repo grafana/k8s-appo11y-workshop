@@ -1,5 +1,5 @@
 # Use the official Node.js image as the base image
-FROM node:22
+FROM node:22@sha256:63538dfe497cc29dfafdda25ada09b46db68a3f4cc205abf1f5d6bf0913f3384
 
 # Set the working directory
 WORKDIR /usr/src/app
