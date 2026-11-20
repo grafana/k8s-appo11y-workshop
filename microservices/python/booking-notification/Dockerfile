@@ -1,4 +1,4 @@
-FROM python:3.14
+FROM python:3.14@sha256:e5de6bc932256f8138c2353023dc4fd24d010d72f6b5cb06be126f0a4cd53784
 
 WORKDIR /python-docker
 
